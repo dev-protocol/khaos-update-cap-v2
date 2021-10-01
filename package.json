@@ -17,7 +17,11 @@
 	},
 	"dependencies": {
 		"@devprotocol/khaos-core": "1.4.0",
+		"@types/deep-equal": "^1.0.1",
+		"@types/mathjs": "^9.4.2",
+		"deep-equal": "^2.0.5",
 		"ethers": "5.4.7",
+		"mathjs": "^9.5.0",
 		"ramda": "0.27.1"
 	},
 	"devDependencies": {
