@@ -6,8 +6,8 @@ export const marketAbi = [
 
 export const getMarketInstance = (
 	address: string,
-	provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider
 ): ethers.Contract => {
-	const marketContract = new ethers.Contract(address, marketAbi, provider)
+	const marketContract = new ethers.Contract(address, marketAbi, l2Provider)
 	return marketContract
 }

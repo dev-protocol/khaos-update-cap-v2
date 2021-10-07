@@ -6,13 +6,18 @@ export const lockupAbi = [
 	'event UpdateCap(uint256)',
 	'function updateCap(uint256) external',
 	'function cap() external view returns (uint256)',
+	'function getLockedupProperties() external view returns (tuple(address property, uint256 value)[])',
 ]
 
 export const getLockupInstance = async (
-	provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider
 ): Promise<ethers.Contract> => {
-	const addressConfigInstance = await getAddressRegistryInstance(provider)
+	const addressConfigInstance = await getAddressRegistryInstance(l2Provider)
 	const lockupAddress = await addressConfigInstance.registries('Lockup')
-	const lockupContract = new ethers.Contract(lockupAddress, lockupAbi, provider)
+	const lockupContract = new ethers.Contract(
+		lockupAddress,
+		lockupAbi,
+		l2Provider
+	)
 	return lockupContract
 }

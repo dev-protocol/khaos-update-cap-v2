@@ -5,7 +5,7 @@ export const getProvider = (network: string): providers.BaseProvider => {
 	return new ethers.providers.JsonRpcProvider(endpoint)
 }
 
-export const getL1Provider = (network: string): providers.BaseProvider => {
-	const endpoint = process.env[`KHAOS_${network.toUpperCase()}_JSON_RPC_L1`]
+export const getL2Provider = (network: string): providers.BaseProvider => {
+	const endpoint = process.env[`KHAOS_${network.toUpperCase()}_JSON_RPC_L2`]
 	return new ethers.providers.JsonRpcProvider(endpoint)
 }

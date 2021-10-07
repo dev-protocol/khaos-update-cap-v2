@@ -17,11 +17,9 @@
 	},
 	"dependencies": {
 		"@devprotocol/khaos-core": "1.4.0",
-		"@types/deep-equal": "^1.0.1",
-		"@types/mathjs": "^9.4.2",
-		"deep-equal": "^2.0.5",
+		"@types/mathjs": "9.4.2",
 		"ethers": "5.4.7",
-		"mathjs": "^9.5.0",
+		"mathjs": "9.5.0",
 		"ramda": "0.27.1"
 	},
 	"devDependencies": {
@@ -30,6 +28,8 @@
 		"@rollup/plugin-node-resolve": "13.0.5",
 		"@types/node": "14.17.20",
 		"@types/ramda": "0.27.45",
+		"@types/sinon": "10.0.4",
+		"@types/deep-equal": "1.0.1",
 		"@typescript-eslint/eslint-plugin": "4.32.0",
 		"@typescript-eslint/parser": "4.32.0",
 		"ava": "3.15.0",
@@ -42,7 +42,10 @@
 		"rimraf": "3.0.2",
 		"rollup": "2.57.0",
 		"rollup-plugin-terser": "7.0.2",
-		"typescript": "4.4.3"
+		"typescript": "4.4.3",
+		"sinon": "11.1.2",
+		"deep-equal": "2.0.5",
+		"ethereumjs-wallet": "1.0.1"
 	},
 	"ava": {
 		"require": [

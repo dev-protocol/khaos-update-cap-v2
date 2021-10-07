@@ -5,13 +5,13 @@ import {
 	getAddressRegistryInstance,
 	getAddressConfigInstance,
 	getMarketInstance,
-	getMarketFactoryInstance
+	getMarketFactoryInstance,
 } from './contract'
-import { getProvider, getL1Provider } from './provider'
+import { getProvider, getL2Provider } from './provider'
 
 export {
 	getProvider,
-	getL1Provider,
+	getL2Provider,
 	getLockupInstance,
 	getErc20Instance,
 	getMarketInstance,

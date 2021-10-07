@@ -14,10 +14,7 @@ const addresses = {
 export const getAddressConfigInstance = async (
 	provider: providers.BaseProvider
 ): Promise<ethers.Contract> => {
-	const abi = [
-		'function lockup() external view returns (address)',
-		'function token() external view returns (address)',
-	]
+	const abi = ['function token() external view returns (address)']
 	// https://eips.ethereum.org/EIPS/eip-155
 	const network = await provider.detectNetwork()
 	const address =

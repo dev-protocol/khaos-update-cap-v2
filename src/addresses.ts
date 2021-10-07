@@ -1,10 +1,9 @@
 import { FunctionAddresses } from '@devprotocol/khaos-core'
-import { getAddressRegistryInstance } from './common'
-import { getProvider } from './common'
+import { getL2Provider, getAddressRegistryInstance } from './common'
 
 export const addresses: FunctionAddresses = async ({ network }) => {
-	const provider = getProvider(network)
-	const addressRegistory = await getAddressRegistryInstance(provider)
+	const l2Provider = getL2Provider(network)
+	const addressRegistory = await getAddressRegistryInstance(l2Provider)
 	const lockupAddress = await addressRegistory.registries('Lockup')
 	return lockupAddress
 }

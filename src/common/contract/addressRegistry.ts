@@ -14,16 +14,16 @@ const addresses = {
 }
 
 export const getAddressRegistryInstance = async (
-	provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider
 ): Promise<ethers.Contract> => {
 	const abi = [
 		'function registries(string memory _key) external view returns (address)',
 	]
 	// https://developer.offchainlabs.com/docs/public_testnet
-	const network = await provider.detectNetwork()
+	const network = await l2Provider.detectNetwork()
 	const address =
 		network.chainId === 42161
 			? addresses.arbitrum.main.registry
 			: addresses.arbitrum.rinkeby.registry
-	return new ethers.Contract(address, abi, provider)
+	return new ethers.Contract(address, abi, l2Provider)
 }

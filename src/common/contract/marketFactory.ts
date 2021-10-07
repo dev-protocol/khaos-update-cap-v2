@@ -6,10 +6,16 @@ export const marketFactoryAbi = [
 ]
 
 export const getMarketFactoryInstance = async (
-	provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider
 ): Promise<ethers.Contract> => {
-	const addressConfigInstance = await getAddressRegistryInstance(provider)
-	const marketFactoryAddress = await addressConfigInstance.registries('MarketFactory')
-	const marketFactoryContract = new ethers.Contract(marketFactoryAddress, marketFactoryAbi, provider)
+	const addressConfigInstance = await getAddressRegistryInstance(l2Provider)
+	const marketFactoryAddress = await addressConfigInstance.registries(
+		'MarketFactory'
+	)
+	const marketFactoryContract = new ethers.Contract(
+		marketFactoryAddress,
+		marketFactoryAbi,
+		l2Provider
+	)
 	return marketFactoryContract
 }
