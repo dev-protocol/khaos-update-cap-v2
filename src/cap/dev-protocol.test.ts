@@ -26,7 +26,7 @@ let getLockupInstance: sinon.SinonStub<
 	Promise<Contract>
 >
 
-const enableMarketListFunc = async (): Promise<string[]> => {
+const getEnabledMarketsFunc = async (): Promise<string[]> => {
 	return Promise.resolve(['marketAddress1', 'marketAddress2'])
 }
 
@@ -65,7 +65,7 @@ test.before(() => {
 test('get property list.', async (t) => {
 	getMarketFactoryInstance
 		.withArgs({ network: 'l2Mainnet' } as any)
-		.returns({ enableMarketList: enableMarketListFunc } as any)
+		.returns({ getEnabledMarkets: getEnabledMarketsFunc } as any)
 	getMarketInstance
 		.withArgs('marketAddress1', { network: 'l2Mainnet' } as any)
 		.returns({

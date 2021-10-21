@@ -8,7 +8,7 @@ const addresses = {
 		},
 		rinkeby: {
 			// TODO
-			registry: '0xD6D07f1c048bDF2B3d5d9B6c25eD1FC5348D0A70',
+			registry: '0x519d5e729fbE6B3e4607260413Fb684759612465',
 		},
 	},
 }

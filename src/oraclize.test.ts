@@ -4,14 +4,15 @@
 import test from 'ava'
 import { bignumber, BigNumber } from 'mathjs'
 import sinon from 'sinon'
+import { NetworkName } from '@devprotocol/khaos-core'
 import { oraclize } from './oraclize'
 import * as providerModules from './common'
 import * as capModules from './cap'
 import { BaseProvider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
 
-let getProvider: sinon.SinonStub<[network: string], BaseProvider>
-let getL2Provider: sinon.SinonStub<[network: string], BaseProvider>
+let getProvider: sinon.SinonStub<[network: NetworkName], BaseProvider>
+let getL2Provider: sinon.SinonStub<[network: NetworkName], BaseProvider>
 let getCap: sinon.SinonStub<
 	[provider: BaseProvider, provider: BaseProvider],
 	Promise<BigNumber>
