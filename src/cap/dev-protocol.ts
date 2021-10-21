@@ -10,7 +10,7 @@ export const getAuthinticatedProperty = async (
 	l2Provider: providers.BaseProvider
 ): Promise<readonly string[]> => {
 	const marketFactory = await getMarketFactoryInstance(l2Provider)
-	const marketAddressList = await marketFactory.enableMarketList()
+	const marketAddressList = await marketFactory.getEnabledMarkets()
 	const propertiesList = await Promise.all(
 		marketAddressList.map(async (marketAddress: string) => {
 			const market = getMarketInstance(marketAddress, l2Provider)

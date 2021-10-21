@@ -2,7 +2,7 @@ import { ethers, providers } from 'ethers'
 import { getAddressRegistryInstance } from './addressRegistry'
 
 export const marketFactoryAbi = [
-	'function enableMarketList() external view returns (address[] memory)',
+	'function getEnabledMarkets() external view returns (address[] memory)',
 ]
 
 export const getMarketFactoryInstance = async (

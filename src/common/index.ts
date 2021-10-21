@@ -7,7 +7,7 @@ import {
 	getMarketInstance,
 	getMarketFactoryInstance,
 } from './contract'
-import { getProvider, getL2Provider } from './provider'
+import { getProvider, getL2Provider, isL2 } from './provider'
 
 export {
 	getProvider,
@@ -18,5 +18,6 @@ export {
 	getAddressRegistryInstance,
 	getAddressConfigInstance,
 	getMarketFactoryInstance,
+	isL2,
 	lockupAbi,
 }
