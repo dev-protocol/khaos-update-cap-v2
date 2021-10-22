@@ -9,7 +9,8 @@ export const getProvider = (network: NetworkName): providers.BaseProvider => {
 }
 
 export const getL2Provider = (network: NetworkName): providers.BaseProvider => {
-	const endpoint = process.env[`KHAOS_${network.toUpperCase()}_JSON_RPC_L2`]
+	const keyName = network.toUpperCase().replace('-', '_')
+	const endpoint = process.env[`KHAOS_${keyName}_JSON_RPC_L2`]
 	return new ethers.providers.JsonRpcProvider(endpoint)
 }
 
