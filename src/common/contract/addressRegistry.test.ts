@@ -12,7 +12,7 @@ test('get the AddressConfig contract object.(mainnet)', async (t) => {
 		detectNetwork: dummyDetectNetwork,
 		_isProvider: true,
 	} as any)
-	t.is(addressReg.address, '0x1D415aa39D647834786EB9B5a333A50e9935b796')
+	t.is(addressReg.address, '0xbeF4DeEA3AE863739Bd402E025c749536f491ffa')
 })
 
 test('get the AddressConfig contract object.(rinkeby)', async (t) => {

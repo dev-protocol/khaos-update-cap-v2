@@ -2,12 +2,10 @@ import { ethers, providers } from 'ethers'
 
 const addresses = {
 	arbitrum: {
-		main: {
-			// TODO
-			registry: '0x1D415aa39D647834786EB9B5a333A50e9935b796',
+		one: {
+			registry: '0xbeF4DeEA3AE863739Bd402E025c749536f491ffa',
 		},
 		rinkeby: {
-			// TODO
 			registry: '0x519d5e729fbE6B3e4607260413Fb684759612465',
 		},
 	},
@@ -23,7 +21,7 @@ export const getAddressRegistryInstance = async (
 	const network = await l2Provider.detectNetwork()
 	const address =
 		network.chainId === 42161
-			? addresses.arbitrum.main.registry
+			? addresses.arbitrum.one.registry
 			: addresses.arbitrum.rinkeby.registry
 	return new ethers.Contract(address, abi, l2Provider)
 }
