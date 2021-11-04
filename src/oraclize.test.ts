@@ -11,12 +11,8 @@ import * as capModules from './cap'
 import { BaseProvider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
 
-let getProvider: sinon.SinonStub<[network: NetworkName], BaseProvider>
 let getL2Provider: sinon.SinonStub<[network: NetworkName], BaseProvider>
-let getCap: sinon.SinonStub<
-	[provider: BaseProvider, provider: BaseProvider],
-	Promise<BigNumber>
->
+let getCap: sinon.SinonStub<[provider: BaseProvider], Promise<BigNumber>>
 let isUpdateCap: sinon.SinonStub<
 	[provider: BaseProvider, lockupContract: Contract, transactionHash: string],
 	Promise<boolean>
@@ -34,8 +30,6 @@ const dummyNumber =
 	'3175573141986827732.839958658618868394957633106846215492361'
 
 test.before(() => {
-	getProvider = sinon.stub(providerModules, 'getProvider')
-	getProvider.withArgs('mainnet').returns({ network: 'mainnet' } as any)
 	getL2Provider = sinon.stub(providerModules, 'getL2Provider')
 	getL2Provider.withArgs('mainnet').returns({ network: 'l2Mainnet' } as any)
 	getLockupInstance = sinon.stub(providerModules, 'getLockupInstance')
@@ -56,7 +50,7 @@ test('Returns oraclize data', async (t) => {
 		)
 		.resolves(true)
 	getCap
-		.withArgs({ network: 'mainnet' } as any, { network: 'l2Mainnet' } as any)
+		.withArgs({ network: 'l2Mainnet' } as any)
 		.resolves(bignumber(dummyNumber))
 	isSameVal
 		.withArgs({ name: 'lockup' } as any, bignumber(dummyNumber.split('.')[0]))
@@ -96,7 +90,6 @@ test('Returns undefind', async (t) => {
 })
 
 test.after(() => {
-	getProvider.restore()
 	getL2Provider.restore()
 	getCap.restore()
 	isUpdateCap.restore()

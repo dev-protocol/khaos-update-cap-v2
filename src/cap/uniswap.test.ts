@@ -10,7 +10,7 @@ import {
 	getDevBalanceOfLiquidityPool,
 } from './uniswap'
 
-let getAddressConfigInstance: sinon.SinonStub<
+let getAddressRegistryInstance: sinon.SinonStub<
 	[provider: providers.BaseProvider],
 	Promise<Contract>
 >
@@ -19,31 +19,31 @@ let getErc20Instance: sinon.SinonStub<
 	Contract
 >
 
-const tokenFunc = async (): Promise<string> => {
-	return 'dummy-dev-token-address'
+const registriesFunc = async (arg: string): Promise<string> => {
+	return arg === 'Dev' ? 'dummy-dev-token-address' : ''
 }
 
 const balanceOfFunc = async (address: string): Promise<BigNumber> => {
-	if (address == '0x4168CEF0fCa0774176632d86bA26553E3B9cF59d') {
+	if (address == '0xAb2E6375623CDA1ea7950e38A6cF026d059B9791') {
 		return BigNumber.from(100)
 	}
 	return BigNumber.from(0)
 }
 
 test.before(() => {
-	getAddressConfigInstance = sinon.stub(
+	getAddressRegistryInstance = sinon.stub(
 		contractModules,
-		'getAddressConfigInstance'
+		'getAddressRegistryInstance'
 	)
-	getAddressConfigInstance
+	getAddressRegistryInstance
 		.withArgs(null as any)
-		.returns({ token: tokenFunc } as any)
+		.returns({ registries: registriesFunc } as any)
 	getErc20Instance = sinon.stub(contractModules, 'getErc20Instance')
 	getErc20Instance
 		.withArgs('dummy-dev-token-address', null as any)
 		.returns({ balanceOf: balanceOfFunc } as any)
 	getErc20Instance
-		.withArgs('0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', null as any)
+		.withArgs('0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', null as any)
 		.returns({ balanceOf: balanceOfFunc } as any)
 })
 
@@ -60,6 +60,6 @@ test('get weth balance.', async (t) => {
 })
 
 test.after(() => {
-	getAddressConfigInstance.restore()
+	getAddressRegistryInstance.restore()
 	getErc20Instance.restore()
 })
