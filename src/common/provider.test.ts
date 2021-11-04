@@ -1,24 +1,7 @@
 /* eslint-disable functional/immutable-data */
 import test from 'ava'
 import { ethers } from 'ethers'
-import { getProvider, getL2Provider, isL2 } from './provider'
-
-// getProvider
-test('get the provider of the mainnet.', async (t) => {
-	process.env[`KHAOS_MAINNET_JSON_RPC`] = 'https://testdomain:1234'
-	const provider = getProvider('arbitrum-one')
-	const converted = <ethers.providers.JsonRpcProvider>provider
-	t.is(converted.connection.url, 'https://testdomain:1234')
-	process.env[`KHAOS_MAINNET_JSON_RPC`] = ''
-})
-
-test('get the provider of the ropsten.', async (t) => {
-	process.env[`KHAOS_ROPSTEN_JSON_RPC`] = 'https://testdomainropsten:1234'
-	const provider = getProvider('arbitrum-rinkeby')
-	const converted = <ethers.providers.JsonRpcProvider>provider
-	t.is(converted.connection.url, 'https://testdomainropsten:1234')
-	process.env[`KHAOS_ROPSTEN_JSON_RPC`] = ''
-})
+import { getL2Provider, isL2 } from './provider'
 
 // getL2Provider
 test('get the l2 provider of the mainnet.', async (t) => {

@@ -33,7 +33,7 @@ test.before(() => {
 		'getDevBalanceOfLiquidityPool'
 	)
 	getDevBalanceOfLiquidityPool
-		.withArgs({ network: 'l1Main' } as any)
+		.withArgs({ network: 'l2Main' } as any)
 		.resolves(bignumber('20000000000000000000000'))
 
 	getWEthBalanceOfLiquidityPool = sinon.stub(
@@ -41,7 +41,7 @@ test.before(() => {
 		'getWEthBalanceOfLiquidityPool'
 	)
 	getWEthBalanceOfLiquidityPool
-		.withArgs({ network: 'l1Main' } as any)
+		.withArgs({ network: 'l2Main' } as any)
 		.resolves(bignumber('100000000000000000000'))
 
 	getAuthinticatedProperty = sinon.stub(
@@ -67,10 +67,7 @@ test.before(() => {
 })
 
 test('get withdraw cap', async (t) => {
-	const res = await getCap(
-		{ network: 'l1Main' } as any,
-		{ network: 'l2Main' } as any
-	)
+	const res = await getCap({ network: 'l2Main' } as any)
 	t.is(
 		res.toFixed(),
 		'7152919319288666086753.21108429127155937377694420110723946810172'
