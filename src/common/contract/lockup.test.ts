@@ -1,39 +1,19 @@
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/no-promise-reject */
-/* eslint-disable functional/no-let */
-/* eslint-disable functional/prefer-readonly-type */
 import test from 'ava'
-//import sinon from 'sinon'
-import Wallet from 'ethereumjs-wallet'
-//import { ethers } from 'ethers'
-import { getLockupInstance, lockupAbi } from './lockup'
+import { getLockupInstance, getLockupAddress, lockupAbi } from './lockup'
 
-const address = Wallet.generate().getAddressString()
-
-const testFunc = async (contractname: string): Promise<string> => {
-	const result =
-		contractname === 'Lockup'
-			? Promise.resolve(address)
-			: Promise.reject('error')
-	return result
-}
-
-// test.before(() => {
-// 	getAddressRegistryInstance
-// 		.withArgs({ network: 'l2Mainnet', _isProvider: true } as any)
-// 		.returns({ registries: testFunc } as any)
-// })
-
-// getMarketFactoryInstance
+// getLockupInstance
 test('get the lockup contract object', async (t) => {
+	const detectNetworkFunc = async (): Promise<any> => {
+		return { chainId: 42161 }
+	}
 	const lockup = await getLockupInstance({
-		network: 'l2Mainnet',
+		detectNetwork: detectNetworkFunc,
 		_isProvider: true,
 	} as any)
-	t.is(lockup.address, address)
+	t.is(lockup.address, '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0')
 })
 
-// getMarketFactoryInstance
+// lockupAbi
 test('get lockup abi', async (t) => {
 	t.is(lockupAbi[0], 'event Lockedup(address, address, uint256)')
 	t.is(lockupAbi[1], 'event UpdateCap(uint256)')
@@ -45,6 +25,18 @@ test('get lockup abi', async (t) => {
 	)
 })
 
-// test.after(() => {
-// 	getAddressRegistryInstance.restore()
-// })
+// getLockupAddress
+test('get lockup address(arbi-one)', async (t) => {
+	const address = getLockupAddress('arbitrum-one')
+	t.is(address, '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0')
+})
+
+test('get lockup address(arbi-rinkeby)', async (t) => {
+	const address = getLockupAddress('arbitrum-rinkeby')
+	t.is(address, '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa')
+})
+
+test('get lockup address(mainnet)', async (t) => {
+	const address = getLockupAddress('mainnet')
+	t.is(address, '')
+})

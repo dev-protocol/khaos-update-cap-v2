@@ -1,7 +1,7 @@
 import { ethers, providers } from 'ethers'
 import { getNetworknameFromProvider } from '../provider'
 
-export const marketFactoryAbi = [
+const marketFactoryAbi = [
 	'function getEnabledMarkets() external view returns (address[] memory)',
 ]
 

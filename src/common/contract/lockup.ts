@@ -1,6 +1,6 @@
 import { ethers, providers } from 'ethers'
 import { NetworkName } from '@devprotocol/khaos-core'
-import { getNetworknameFromProvider } from '../provider'
+import { getNetworknameFromProvider } from '../../common'
 
 export const lockupAbi = [
 	'event Lockedup(address, address, uint256)',

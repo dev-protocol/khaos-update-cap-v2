@@ -1,5 +1,5 @@
 import { lockupAbi, getLockupInstance, getLockupAddress } from './lockup'
-import { getMarketFactoryInstance } from './marketFactory'
+import { getMarketFactoryInstance } from './market-factory'
 import { getMarketInstance } from './market'
 import { getErc20Instance } from './erc20'
 
