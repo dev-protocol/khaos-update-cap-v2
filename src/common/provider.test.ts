@@ -1,7 +1,7 @@
 /* eslint-disable functional/immutable-data */
 import test from 'ava'
 import { ethers } from 'ethers'
-import { getL2Provider, isL2 } from './provider'
+import { getL2Provider, getNetworknameFromProvider } from './provider'
 
 // getL2Provider
 test('get the l2 provider of the mainnet.', async (t) => {
@@ -21,18 +21,23 @@ test('get the l2 provider of the ropsten.', async (t) => {
 	process.env[`KHAOS_ARBITRUM-RINKEBY_JSON_RPC_L2`] = ''
 })
 
-// isL2
-test('If the network name is mainnet, return false', async (t) => {
-	const result = isL2('mainnet')
-	t.false(result)
+// getNetworknameFromProvider
+test('get network name(arbi-one).', async (t) => {
+	const detectNetworkFunc = async (): Promise<any> => {
+		return { chainId: 42161 }
+	}
+	const networkName = await getNetworknameFromProvider({
+		detectNetwork: detectNetworkFunc,
+	} as any)
+	t.is(networkName, 'arbitrum-one')
 })
 
-test('If the network name is ropsten, return false', async (t) => {
-	const result = isL2('ropsten')
-	t.false(result)
-})
-
-test('If the network name is l2, return true', async (t) => {
-	const result = isL2('arbitrum-one')
-	t.true(result)
+test('get network name(arbi-rinkeby).', async (t) => {
+	const detectNetworkFunc = async (): Promise<any> => {
+		return { chainId: 421611 }
+	}
+	const networkName = await getNetworknameFromProvider({
+		detectNetwork: detectNetworkFunc,
+	} as any)
+	t.is(networkName, 'arbitrum-rinkeby')
 })
