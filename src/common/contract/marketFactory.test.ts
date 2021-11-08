@@ -5,7 +5,6 @@ import test from 'ava'
 import sinon from 'sinon'
 import { ethers } from 'ethers'
 import Wallet from 'ethereumjs-wallet'
-import * as addressRegistoryModules from './addressRegistry'
 import { getMarketFactoryInstance } from './marketFactory'
 
 let getAddressRegistryInstance: sinon.SinonStub<
@@ -23,10 +22,6 @@ test.before(() => {
 				: Promise.reject('error')
 		return result
 	}
-	getAddressRegistryInstance = sinon.stub(
-		addressRegistoryModules,
-		'getAddressRegistryInstance'
-	)
 	getAddressRegistryInstance
 		.withArgs({ network: 'l2Mainnet', _isProvider: true } as any)
 		.returns({ registries: testFunc } as any)

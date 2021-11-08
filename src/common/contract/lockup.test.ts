@@ -3,16 +3,10 @@
 /* eslint-disable functional/no-let */
 /* eslint-disable functional/prefer-readonly-type */
 import test from 'ava'
-import sinon from 'sinon'
+//import sinon from 'sinon'
 import Wallet from 'ethereumjs-wallet'
-import { ethers } from 'ethers'
-import * as addressRegistoryModules from './addressRegistry'
+//import { ethers } from 'ethers'
 import { getLockupInstance, lockupAbi } from './lockup'
-
-let getAddressRegistryInstance: sinon.SinonStub<
-	[provider: ethers.providers.BaseProvider],
-	Promise<ethers.Contract>
->
 
 const address = Wallet.generate().getAddressString()
 
@@ -24,15 +18,11 @@ const testFunc = async (contractname: string): Promise<string> => {
 	return result
 }
 
-test.before(() => {
-	getAddressRegistryInstance = sinon.stub(
-		addressRegistoryModules,
-		'getAddressRegistryInstance'
-	)
-	getAddressRegistryInstance
-		.withArgs({ network: 'l2Mainnet', _isProvider: true } as any)
-		.returns({ registries: testFunc } as any)
-})
+// test.before(() => {
+// 	getAddressRegistryInstance
+// 		.withArgs({ network: 'l2Mainnet', _isProvider: true } as any)
+// 		.returns({ registries: testFunc } as any)
+// })
 
 // getMarketFactoryInstance
 test('get the lockup contract object', async (t) => {
@@ -55,6 +45,6 @@ test('get lockup abi', async (t) => {
 	)
 })
 
-test.after(() => {
-	getAddressRegistryInstance.restore()
-})
+// test.after(() => {
+// 	getAddressRegistryInstance.restore()
+// })

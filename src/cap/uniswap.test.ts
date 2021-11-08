@@ -10,10 +10,6 @@ import {
 	getDevBalanceOfLiquidityPool,
 } from './uniswap'
 
-let getAddressRegistryInstance: sinon.SinonStub<
-	[provider: providers.BaseProvider],
-	Promise<Contract>
->
 let getErc20Instance: sinon.SinonStub<
 	[address: string, provider: providers.BaseProvider],
 	Contract
@@ -31,13 +27,6 @@ const balanceOfFunc = async (address: string): Promise<BigNumber> => {
 }
 
 test.before(() => {
-	getAddressRegistryInstance = sinon.stub(
-		contractModules,
-		'getAddressRegistryInstance'
-	)
-	getAddressRegistryInstance
-		.withArgs(null as any)
-		.returns({ registries: registriesFunc } as any)
 	getErc20Instance = sinon.stub(contractModules, 'getErc20Instance')
 	getErc20Instance
 		.withArgs('dummy-dev-token-address', null as any)
@@ -60,6 +49,5 @@ test('get weth balance.', async (t) => {
 })
 
 test.after(() => {
-	getAddressRegistryInstance.restore()
 	getErc20Instance.restore()
 })
