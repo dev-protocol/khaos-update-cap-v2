@@ -7,6 +7,10 @@ export const getL2Provider = (network: NetworkName): providers.BaseProvider => {
 	return new ethers.providers.JsonRpcProvider(endpoint)
 }
 
-export const isL2 = (network: NetworkName): boolean => {
-	return network !== 'mainnet' && network !== 'ropsten'
+export const getNetworknameFromProvider = async (
+	l2Provider: providers.BaseProvider
+): Promise<NetworkName> => {
+	// https://developer.offchainlabs.com/docs/public_testnet
+	const network = await l2Provider.detectNetwork()
+	return network.chainId === 42161 ? 'arbitrum-one' : 'arbitrum-rinkeby'
 }

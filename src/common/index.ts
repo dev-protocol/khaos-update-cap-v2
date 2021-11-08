@@ -2,19 +2,19 @@ import {
 	lockupAbi,
 	getLockupInstance,
 	getErc20Instance,
-	getAddressRegistryInstance,
 	getMarketInstance,
 	getMarketFactoryInstance,
+	getLockupAddress,
 } from './contract'
-import { getL2Provider, isL2 } from './provider'
+import { getL2Provider, getNetworknameFromProvider } from './provider'
 
 export {
 	getL2Provider,
 	getLockupInstance,
 	getErc20Instance,
 	getMarketInstance,
-	getAddressRegistryInstance,
 	getMarketFactoryInstance,
-	isL2,
+	getLockupAddress,
+	getNetworknameFromProvider,
 	lockupAbi,
 }
