@@ -15,7 +15,7 @@ test('get the lockup contract object', async (t) => {
 
 // lockupAbi
 test('get lockup abi', async (t) => {
-	t.is(lockupAbi[0], 'event Lockedup(address, address, uint256)')
+	t.is(lockupAbi[0], 'event Lockedup(address indexed _from, address indexed _property, uint256 _value, uint256 _tokenId)')
 	t.is(lockupAbi[1], 'event UpdateCap(uint256)')
 	t.is(lockupAbi[2], 'function updateCap(uint256) external')
 	t.is(lockupAbi[3], 'function cap() external view returns (uint256)')

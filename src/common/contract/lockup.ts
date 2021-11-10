@@ -3,7 +3,7 @@ import { NetworkName } from '@devprotocol/khaos-core'
 import { getNetworknameFromProvider } from '../../common'
 
 export const lockupAbi = [
-	'event Lockedup(address, address, uint256)',
+	'event Lockedup(address indexed _from, address indexed _property, uint256 _value, uint256 _tokenId)',
 	'event UpdateCap(uint256)',
 	'function updateCap(uint256) external',
 	'function cap() external view returns (uint256)',
@@ -14,8 +14,8 @@ export const getLockupAddress = (network: NetworkName): string => {
 	return network === 'arbitrum-one'
 		? '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0'
 		: network === 'arbitrum-rinkeby'
-		? '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa'
-		: ''
+			? '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa'
+			: ''
 }
 
 export const getLockupInstance = async (
