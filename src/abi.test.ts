@@ -2,7 +2,10 @@ import test from 'ava'
 import { abi } from './abi'
 
 test('Returns abi informations.', async (t) => {
-	t.is(abi[0], 'event Lockedup(address indexed _from, address indexed _property, uint256 _value, uint256 _tokenId)')
+	t.is(
+		abi[0],
+		'event Lockedup(address indexed _from, address indexed _property, uint256 _value, uint256 _tokenId)'
+	)
 	t.is(abi[1], 'event UpdateCap(uint256)')
 	t.is(abi[2], 'function updateCap(uint256) external')
 	t.is(abi[3], 'function cap() external view returns (uint256)')
