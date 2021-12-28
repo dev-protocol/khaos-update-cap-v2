@@ -17,7 +17,7 @@
 	},
 	"dependencies": {
 		"@devprotocol/khaos-core": "1.5.1",
-		"@rollup/plugin-inject": "4.0.3",
+		"@rollup/plugin-inject": "4.0.4",
 		"@rollup/plugin-json": "4.1.0",
 		"@types/mathjs": "9.4.2",
 		"ethers": "5.5.2",
