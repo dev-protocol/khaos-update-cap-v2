@@ -43,3 +43,13 @@ test('get lockup address(mainnet)', async (t) => {
 	const address = getLockupAddress('mainnet')
 	t.is(address, '')
 })
+
+test('get lockup address(polygon-mainnet)', async (t) => {
+	const address = getLockupAddress('polygon-mainnet')
+	t.is(address, '0x42767B12d3f07bE0D951a64eE6573B40Ff165C4e')
+})
+
+test('get lockup address(polygon-mumbai)', async (t) => {
+	const address = getLockupAddress('polygon-mumbai')
+	t.is(address, '0xfDC5FF1F07871A247eafE14eEB134eeFcbCf1ceA')
+})

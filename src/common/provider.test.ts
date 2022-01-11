@@ -41,3 +41,23 @@ test('get network name(arbi-rinkeby).', async (t) => {
 	} as any)
 	t.is(networkName, 'arbitrum-rinkeby')
 })
+
+test('get network name(polygon-mainnet).', async (t) => {
+	const detectNetworkFunc = async (): Promise<any> => {
+		return { chainId: 137 }
+	}
+	const networkName = await getNetworknameFromProvider({
+		detectNetwork: detectNetworkFunc,
+	} as any)
+	t.is(networkName, 'polygon-mainnet')
+})
+
+test('get network name(polygon-mumbai).', async (t) => {
+	const detectNetworkFunc = async (): Promise<any> => {
+		return { chainId: 80001 }
+	}
+	const networkName = await getNetworknameFromProvider({
+		detectNetwork: detectNetworkFunc,
+	} as any)
+	t.is(networkName, 'polygon-mumbai')
+})

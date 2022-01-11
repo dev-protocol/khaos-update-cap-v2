@@ -14,8 +14,12 @@ export const getLockupAddress = (network: NetworkName): string => {
 	return network === 'arbitrum-one'
 		? '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0'
 		: network === 'arbitrum-rinkeby'
-		? '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa'
-		: ''
+			? '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa'
+			: network === 'polygon-mainnet'
+				? '0x42767B12d3f07bE0D951a64eE6573B40Ff165C4e'
+				: network === 'polygon-mumbai'
+					? '0xfDC5FF1F07871A247eafE14eEB134eeFcbCf1ceA'
+					: ''
 }
 
 export const getLockupInstance = async (

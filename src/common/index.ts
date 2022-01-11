@@ -5,6 +5,7 @@ import {
 	getMarketInstance,
 	getMarketFactoryInstance,
 	getLockupAddress,
+	getDevInstance,
 } from './contract'
 import { getL2Provider, getNetworknameFromProvider } from './provider'
 
@@ -16,5 +17,6 @@ export {
 	getMarketFactoryInstance,
 	getLockupAddress,
 	getNetworknameFromProvider,
+	getDevInstance,
 	lockupAbi,
 }

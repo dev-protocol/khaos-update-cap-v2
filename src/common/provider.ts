@@ -12,5 +12,13 @@ export const getNetworknameFromProvider = async (
 ): Promise<NetworkName> => {
 	// https://developer.offchainlabs.com/docs/public_testnet
 	const network = await l2Provider.detectNetwork()
-	return network.chainId === 42161 ? 'arbitrum-one' : 'arbitrum-rinkeby'
+	const networkName = network.chainId === 42161 ? 'arbitrum-one'
+		: network.chainId === 421611 ? 'arbitrum-rinkeby'
+			: network.chainId === 137 ? 'polygon-mainnet'
+				: 'polygon-mumbai'
+
+	return networkName
 }
+// TODO
+// KHAOS_POLYGON_MAINNET_JSON_RPC_L2
+// KHAOS_POLYGON_MUMBAI_JSON_RPC_L2
