@@ -1,21 +1,24 @@
 /* eslint-disable functional/no-expression-statement */
-import { providers } from 'ethers'
-import { FunctionOraclizer } from '@devprotocol/khaos-core'
-import { getL2Provider, getLockupInstance } from './common'
+import { ethers, providers } from 'ethers'
+import { FunctionOraclizer, NetworkName } from '@devprotocol/khaos-core'
+import {
+	getL2Provider,
+	getLockupInstance,
+	getAddressRegistryInstance,
+} from './common'
 import { isSameVal, isUpdateCap, getCap } from './cap'
 import { bignumber } from 'mathjs'
 
 export const oraclize: FunctionOraclizer = async ({ query, network }) => {
 	const l2Provider = getL2Provider(network)
-	const lockupContract = await getLockupInstance(l2Provider)
-	const isUpdate = await isUpdateCap(
-		l2Provider,
-		lockupContract,
-		query.transactionhash
-	)
-	const message = isUpdate ? await getCapValue(l2Provider) : ''
+	const addressRegistry = getAddressRegistryInstance(l2Provider, network)
+	const lockup = await getLockupInstance(l2Provider, addressRegistry)
+	const isUpdate = await isUpdateCap(l2Provider, lockup, query.transactionhash)
+	const message = isUpdate
+		? await getCapValue(l2Provider, addressRegistry, lockup, network)
+		: ''
 	const isSame =
-		message !== '' ? await isSameVal(lockupContract, bignumber(message)) : true
+		message !== '' ? await isSameVal(lockup, bignumber(message)) : true
 	const result = isSame
 		? undefined
 		: {
@@ -27,9 +30,12 @@ export const oraclize: FunctionOraclizer = async ({ query, network }) => {
 }
 
 const getCapValue = async (
-	l2Provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider,
+	addressRegistry: ethers.Contract,
+	lockup: ethers.Contract,
+	network: NetworkName
 ): Promise<string> => {
-	const cap = await getCap(l2Provider)
+	const cap = await getCap(l2Provider, addressRegistry, lockup, network)
 	const [message] = cap.toFixed().split('.') // Forcibly truncates the decimal point regardless of the BigNumber specifications.
 	return message
 }

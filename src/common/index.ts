@@ -6,8 +6,11 @@ import {
 	getMarketFactoryInstance,
 	getLockupAddress,
 	getDevInstance,
+	getUniswapLpAddress,
+	getWEthInstance,
+	getAddressRegistryInstance,
 } from './contract'
-import { getL2Provider, getNetworknameFromProvider } from './provider'
+import { getL2Provider } from './provider'
 
 export {
 	getL2Provider,
@@ -16,7 +19,9 @@ export {
 	getMarketInstance,
 	getMarketFactoryInstance,
 	getLockupAddress,
-	getNetworknameFromProvider,
 	getDevInstance,
+	getUniswapLpAddress,
+	getWEthInstance,
+	getAddressRegistryInstance,
 	lockupAbi,
 }

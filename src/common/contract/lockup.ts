@@ -1,6 +1,4 @@
 import { ethers, providers } from 'ethers'
-import { NetworkName } from '@devprotocol/khaos-core'
-import { getNetworknameFromProvider } from '../../common'
 
 export const lockupAbi = [
 	'event Lockedup(address indexed _from, address indexed _property, uint256 _value, uint256 _tokenId)',
@@ -10,23 +8,17 @@ export const lockupAbi = [
 	'function getLockedupProperties() external view returns (tuple(address property, uint256 value)[])',
 ]
 
-export const getLockupAddress = (network: NetworkName): string => {
-	return network === 'arbitrum-one'
-		? '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0'
-		: network === 'arbitrum-rinkeby'
-			? '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa'
-			: network === 'polygon-mainnet'
-				? '0x42767B12d3f07bE0D951a64eE6573B40Ff165C4e'
-				: network === 'polygon-mumbai'
-					? '0xfDC5FF1F07871A247eafE14eEB134eeFcbCf1ceA'
-					: ''
+export const getLockupAddress = async (
+	addressRegistry: ethers.Contract
+): Promise<string> => {
+	return await addressRegistry.registries('Lockup')
 }
 
 export const getLockupInstance = async (
-	l2Provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider,
+	addressRegistry: ethers.Contract
 ): Promise<ethers.Contract> => {
-	const networkName = await getNetworknameFromProvider(l2Provider)
-	const lockupAddress = getLockupAddress(networkName)
+	const lockupAddress = await getLockupAddress(addressRegistry)
 	const lockupContract = new ethers.Contract(
 		lockupAddress,
 		lockupAbi,

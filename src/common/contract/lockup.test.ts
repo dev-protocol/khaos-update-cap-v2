@@ -6,11 +6,17 @@ test('get the lockup contract object', async (t) => {
 	const detectNetworkFunc = async (): Promise<any> => {
 		return { chainId: 42161 }
 	}
-	const lockup = await getLockupInstance({
-		detectNetwork: detectNetworkFunc,
-		_isProvider: true,
-	} as any)
-	t.is(lockup.address, '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0')
+	const registriesFunc = async (key: string): Promise<string> => {
+		return key == 'Lockup' ? '0xA5577D1cec2583058A6Bd6d5DEAC44797c205701' : '0x'
+	}
+	const lockup = await getLockupInstance(
+		{
+			detectNetwork: detectNetworkFunc,
+			_isProvider: true,
+		} as any,
+		{ registries: registriesFunc } as any
+	)
+	t.is(lockup.address, '0xA5577D1cec2583058A6Bd6d5DEAC44797c205701')
 })
 
 // lockupAbi
@@ -30,26 +36,9 @@ test('get lockup abi', async (t) => {
 
 // getLockupAddress
 test('get lockup address(arbi-one)', async (t) => {
-	const address = getLockupAddress('arbitrum-one')
-	t.is(address, '0x1A2B49e10013C40AAC9b6f9e785837bfd329e5e0')
-})
-
-test('get lockup address(arbi-rinkeby)', async (t) => {
-	const address = getLockupAddress('arbitrum-rinkeby')
-	t.is(address, '0x4944CA0423f42DF7c77ad8Cd53F30f31A097F4fa')
-})
-
-test('get lockup address(mainnet)', async (t) => {
-	const address = getLockupAddress('mainnet')
-	t.is(address, '')
-})
-
-test('get lockup address(polygon-mainnet)', async (t) => {
-	const address = getLockupAddress('polygon-mainnet')
-	t.is(address, '0x42767B12d3f07bE0D951a64eE6573B40Ff165C4e')
-})
-
-test('get lockup address(polygon-mumbai)', async (t) => {
-	const address = getLockupAddress('polygon-mumbai')
-	t.is(address, '0xfDC5FF1F07871A247eafE14eEB134eeFcbCf1ceA')
+	const registriesFunc = async (key: string): Promise<string> => {
+		return key == 'Lockup' ? '0xA5577D1cec2583058A6Bd6d5DEAC44797c205701' : '0x'
+	}
+	const address = await getLockupAddress({ registries: registriesFunc } as any)
+	t.is(address, '0xA5577D1cec2583058A6Bd6d5DEAC44797c205701')
 })

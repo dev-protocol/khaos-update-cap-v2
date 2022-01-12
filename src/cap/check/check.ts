@@ -6,15 +6,12 @@ import {
 
 export const isUpdateCap = async (
 	provider: providers.BaseProvider,
-	lockupContract: ethers.Contract,
+	lockup: ethers.Contract,
 	transactionHash: string
 ): Promise<boolean> => {
-	const isLongTimeNotUpdate = await isLongTimeSinceLastUpdate(
-		provider,
-		lockupContract
-	)
+	const isLongTimeNotUpdate = await isLongTimeSinceLastUpdate(provider, lockup)
 	const isLastEvent = isLongTimeNotUpdate
-		? await isLatestLockedupEvent(provider, lockupContract, transactionHash)
+		? await isLatestLockedupEvent(provider, lockup, transactionHash)
 		: false
 	return isLastEvent
 }
