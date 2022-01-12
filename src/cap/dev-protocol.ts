@@ -1,15 +1,15 @@
-import { providers, BigNumber } from 'ethers'
+import { ethers, providers, BigNumber } from 'ethers'
 import { bignumber, BigNumber as MathBigNumber } from 'mathjs'
-import {
-	getMarketFactoryInstance,
-	getMarketInstance,
-	getLockupInstance,
-} from '../common'
+import { getMarketFactoryInstance, getMarketInstance } from '../common'
 
 export const getAuthinticatedProperty = async (
-	l2Provider: providers.BaseProvider
+	l2Provider: providers.BaseProvider,
+	addressRegistry: ethers.Contract
 ): Promise<readonly string[]> => {
-	const marketFactory = await getMarketFactoryInstance(l2Provider)
+	const marketFactory = await getMarketFactoryInstance(
+		l2Provider,
+		addressRegistry
+	)
 	const marketAddressList = await marketFactory.getEnabledMarkets()
 	const propertiesList = await Promise.all(
 		marketAddressList.map(async (marketAddress: string) => {
@@ -32,11 +32,10 @@ export type LockedupProperty = {
 	readonly value: BigNumber
 }
 export const getLockupSumValues = async (
-	l2Provider: providers.BaseProvider
+	lockup: ethers.Contract
 ): Promise<{
 	readonly [k: string]: MathBigNumber
 }> => {
-	const lockup = await getLockupInstance(l2Provider)
 	const lockedupProperties =
 		(await lockup.getLockedupProperties()) as readonly LockedupProperty[]
 	const lockupSumValues = Object.fromEntries(

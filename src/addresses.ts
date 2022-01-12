@@ -1,7 +1,13 @@
 import { FunctionAddresses } from '@devprotocol/khaos-core'
-import { getLockupAddress } from './common'
+import {
+	getL2Provider,
+	getLockupAddress,
+	getAddressRegistryInstance,
+} from './common'
 
 export const addresses: FunctionAddresses = async ({ network }) => {
-	const address = getLockupAddress(network)
-	return address === '' ? undefined : address
+	const l2Provider = getL2Provider(network)
+	const addressRegistry = getAddressRegistryInstance(l2Provider, network)
+	const address = await getLockupAddress(addressRegistry)
+	return address
 }

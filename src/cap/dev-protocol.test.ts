@@ -3,7 +3,7 @@
 
 import test from 'ava'
 import sinon from 'sinon'
-import { providers, BigNumber, Contract } from 'ethers'
+import { ethers, providers, BigNumber, Contract } from 'ethers'
 import {
 	getAuthinticatedProperty,
 	getLockupSumValues,
@@ -12,18 +12,13 @@ import {
 import * as commonModules from '../common'
 
 let getMarketFactoryInstance: sinon.SinonStub<
-	[l2Provider: providers.BaseProvider],
+	[l2Provider: providers.BaseProvider, addressRegistry: ethers.Contract],
 	Promise<Contract>
 >
 
 let getMarketInstance: sinon.SinonStub<
 	[address: string, l2Provider: providers.BaseProvider],
 	Contract
->
-
-let getLockupInstance: sinon.SinonStub<
-	[l2Provider: providers.BaseProvider],
-	Promise<Contract>
 >
 
 const getEnabledMarketsFunc = async (): Promise<string[]> => {
@@ -33,6 +28,7 @@ const getEnabledMarketsFunc = async (): Promise<string[]> => {
 const getAuthenticatedPropertiesFunc1 = async (): Promise<string[]> => {
 	return Promise.resolve(['property1', 'property2', 'property3'])
 }
+
 const getAuthenticatedPropertiesFunc2 = async (): Promise<string[]> => {
 	return Promise.resolve(['property3', 'property4'])
 }
@@ -59,12 +55,14 @@ test.before(() => {
 		'getMarketFactoryInstance'
 	)
 	getMarketInstance = sinon.stub(commonModules, 'getMarketInstance')
-	getLockupInstance = sinon.stub(commonModules, 'getLockupInstance')
 })
 
 test('get property list.', async (t) => {
 	getMarketFactoryInstance
-		.withArgs({ network: 'l2Mainnet' } as any)
+		.withArgs(
+			{ network: 'l2Mainnet' } as any,
+			{ name: 'AddressRegistry' } as any
+		)
 		.returns({ getEnabledMarkets: getEnabledMarketsFunc } as any)
 	getMarketInstance
 		.withArgs('marketAddress1', { network: 'l2Mainnet' } as any)
@@ -76,9 +74,12 @@ test('get property list.', async (t) => {
 		.returns({
 			getAuthenticatedProperties: getAuthenticatedPropertiesFunc2,
 		} as any)
-	const properties = await getAuthinticatedProperty({
-		network: 'l2Mainnet',
-	} as any)
+	const properties = await getAuthinticatedProperty(
+		{
+			network: 'l2Mainnet',
+		} as any,
+		{ name: 'AddressRegistry' } as any
+	)
 	t.is(properties.length, 4)
 	t.is(properties[0], 'property1')
 	t.is(properties[1], 'property2')
@@ -87,11 +88,8 @@ test('get property list.', async (t) => {
 })
 
 test('get lockup info.', async (t) => {
-	getLockupInstance
-		.withArgs({ network: 'l2Mainnet' } as any)
-		.returns({ getLockedupProperties: getLockedupPropertiesFunc } as any)
 	const lockupSumValues = await getLockupSumValues({
-		network: 'l2Mainnet',
+		getLockedupProperties: getLockedupPropertiesFunc,
 	} as any)
 	t.true(lockupSumValues['property1'].eq('10000000000000000'))
 	t.true(lockupSumValues['property2'].eq('20000000000000000'))
@@ -103,5 +101,4 @@ test('get lockup info.', async (t) => {
 test.after(() => {
 	getMarketFactoryInstance.restore()
 	getMarketInstance.restore()
-	getLockupInstance.restore()
 })
