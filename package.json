@@ -38,7 +38,7 @@
 		"deep-equal": "2.1.0",
 		"eslint": "7.32.0",
 		"eslint-config-prettier": "8.5.0",
-		"eslint-plugin-functional": "3.7.2",
+		"eslint-plugin-functional": "4.4.1",
 		"esm": "3.2.25",
 		"ethereumjs-wallet": "1.0.2",
 		"husky": "7.0.4",
