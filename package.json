@@ -22,7 +22,7 @@
 		"@types/mathjs": "9.4.2",
 		"ethers": "5.7.2",
 		"mathjs": "10.5.2",
-		"ramda": "0.28.0"
+		"ramda": "0.29.0"
 	},
 	"devDependencies": {
 		"@ava/typescript": "2.0.0",
@@ -30,7 +30,7 @@
 		"@rollup/plugin-node-resolve": "14.1.0",
 		"@types/deep-equal": "1.0.1",
 		"@types/node": "18.16.8",
-		"@types/ramda": "0.28.23",
+		"@types/ramda": "0.29.1",
 		"@types/sinon": "10.0.14",
 		"@typescript-eslint/eslint-plugin": "5.54.1",
 		"@typescript-eslint/parser": "5.54.1",
