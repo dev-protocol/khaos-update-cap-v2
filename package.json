@@ -41,7 +41,7 @@
 		"eslint-plugin-functional": "3.7.2",
 		"esm": "3.2.25",
 		"ethereumjs-wallet": "1.0.2",
-		"husky": "7.0.4",
+		"husky": "8.0.3",
 		"prettier": "2.8.8",
 		"rimraf": "3.0.2",
 		"rollup": "2.79.1",
