@@ -52,7 +52,7 @@ test('get dev balance(arbitrum-one).', async (t) => {
 
 test('get dev balance(polygon-mainnet).', async (t) => {
 	const balanceOfFuncArbiOne = async (address: string): Promise<BigNumber> => {
-		if (address == '0x2314e3B36e8Da5b4E0B591adb18B3E806f0C6Af5') {
+		if (address == '0x4a2752F465EB31653B0D81dF79719c17226801FE') {
 			return BigNumber.from(200)
 		}
 		return BigNumber.from(0)
@@ -100,7 +100,7 @@ test('get weth balance(arbitrum-one).', async (t) => {
 
 test('get weth balance(polygon-mainnet).', async (t) => {
 	const balanceOfFuncArbiOne = async (address: string): Promise<BigNumber> => {
-		if (address == '0x2314e3B36e8Da5b4E0B591adb18B3E806f0C6Af5') {
+		if (address == '0x4a2752F465EB31653B0D81dF79719c17226801FE') {
 			return BigNumber.from(400)
 		}
 		return BigNumber.from(0)

@@ -24,6 +24,7 @@ test('calculate geometric mean(If not staked, convert to 1000000000000000000)', 
 		'0xhogehoge': bignumber('10000000000000000000000'),
 		'0xhugahuga': bignumber('20000000000000000000000'),
 		'0xkayokayo': bignumber('30000000000000000000000'),
+		'0xqwerqwer': bignumber('0'),
 	}
 	const res = calculateGeometricMean(map, [
 		'0xhogehoge',

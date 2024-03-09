@@ -14,7 +14,7 @@ test('get the uniswap lp address(arbitrum-rinkeby).', async (t) => {
 
 test('get the uniswap lp address(polygon-mainnet).', async (t) => {
 	const address = await getUniswapLpAddress('polygon-mainnet')
-	t.is(address, '0x2314e3B36e8Da5b4E0B591adb18B3E806f0C6Af5')
+	t.is(address, '0x4a2752F465EB31653B0D81dF79719c17226801FE')
 })
 
 test('get the uniswap lp address(polygon-mumbai).', async (t) => {

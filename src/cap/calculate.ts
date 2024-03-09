@@ -8,7 +8,10 @@ export const calculateGeometricMean = (
 ): BigNumber => {
 	const values = authinticatedProperties.map((property) => {
 		const value = valueMap[property]
-		const tmp = typeof value === 'undefined' ? '1000000000000000000' : value
+		const tmp =
+			typeof value === 'undefined' || value.equals(0)
+				? '1000000000000000000'
+				: value
 		return bignumber(tmp)
 	})
 	return values.length === 0

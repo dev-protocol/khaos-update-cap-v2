@@ -6,7 +6,7 @@ export const getUniswapLpAddress = (network: NetworkName): string => {
 		: network === 'arbitrum-rinkeby'
 		? ''
 		: network === 'polygon-mainnet'
-		? '0x2314e3B36e8Da5b4E0B591adb18B3E806f0C6Af5'
+		? '0x4a2752F465EB31653B0D81dF79719c17226801FE'
 		: network === 'polygon-mumbai'
 		? ''
 		: ''
