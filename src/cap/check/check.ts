@@ -13,5 +13,7 @@ export const isUpdateCap = async (
 	const isLastEvent = isLongTimeNotUpdate
 		? await isLatestLockedupEvent(provider, lockup, transactionHash)
 		: false
+	// eslint-disable-next-line functional/no-expression-statement
+	console.log('update-cap-v2', { isLongTimeNotUpdate, isLastEvent })
 	return isLastEvent
 }
