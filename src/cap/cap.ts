@@ -34,6 +34,14 @@ export const getCap = async (
 		authinticatedPropertoes
 	)
 	const tmp = bignumber(1).sub(wEthBalance.div(devBalance))
+	// eslint-disable-next-line functional/no-expression-statement
+	console.log('update-cap-v2', {
+		devBalance: devBalance.toFixed(),
+		wEthBalance: wEthBalance.toFixed(),
+		geometricMean: geometricMean.toFixed(),
+		arithmeticMean: arithmeticMean.toFixed(),
+		tmp: tmp.toFixed(),
+	})
 	return devBalance
 		.times(tmp)
 		.times(12)

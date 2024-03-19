@@ -19,6 +19,7 @@ export const oraclize: FunctionOraclizer = async ({ query, network }) => {
 		: ''
 	const isSame =
 		message !== '' ? await isSameVal(lockup, bignumber(message)) : true
+	console.log('update-cap-v2', { isUpdate, message, isSame })
 	const result = isSame
 		? undefined
 		: {
